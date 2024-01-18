@@ -1,27 +1,23 @@
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
-        int n = ransomNote.length(), m = magazine.length();
-        HashMap<Character, Integer> map1 = new HashMap<>();
-        HashMap<Character, Integer> map2 = new HashMap<>();
-
-        for (int i = 0; i < n; i++ ) {
-            map1.put(ransomNote.charAt(i), map1.getOrDefault(ransomNote.charAt(i), 0) + 1);
+        if (ransomNote.length() > magazine.length()) {
+            return false;
         }
 
-        for (int i = 0; i < m; i++ ) {
-            map2.put(magazine.charAt(i), map2.getOrDefault(magazine.charAt(i), 0) + 1);
-        }  
+        int n = ransomNote.length(), m = magazine.length();
+        int[] characterCount = new int[26];
 
-        for (int i = 0; i < n; i++) {
-            int value2 = 0;
-            int value1 = map1.get(ransomNote.charAt(i));
-            if (map2.containsKey(ransomNote.charAt(i))) {
-                value2 = map2.get(ransomNote.charAt(i));
-            }
-            if (value1 > value2) {
+        for (char c: magazine.toCharArray()) {
+            characterCount[c - 'a']++;
+            System.out.println( characterCount[c - 'a']);
+        }
+        for (char c: ransomNote.toCharArray()) {
+            if (characterCount[c - 'a'] == 0) {
                 return false;
             }
+            characterCount[c - 'a']--;
         }
+
         return true;
     }
 }
