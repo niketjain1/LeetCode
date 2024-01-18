@@ -3,8 +3,7 @@ class Solution {
         if (ransomNote.length() > magazine.length()) {
             return false;
         }
-
-        int n = ransomNote.length(), m = magazine.length();
+        
         int[] characterCount = new int[26];
 
         for (char c: magazine.toCharArray()) {
